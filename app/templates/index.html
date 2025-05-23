@@ -162,7 +162,7 @@
         Цвет кузова: <input type="text" name="ext_col" required><br>
         Цвет салона: <input type="text" name="int_col" required><br>
         Аварии (yes/no): <input type="text" name="accident" required><br>
-        <input type="submit" value="Предсказать цену (регрессия)">
+        <input type="text" name="model_year" value="{{ request.form.model_year }}" required>
     </form>
 </main>
 
@@ -174,5 +174,23 @@
     © 2025 CarPricePro — Ваш помощник в мире автоцен
 </footer>
 
+    <script>
+  const inputs = document.querySelectorAll('input[type="text"]');
+
+  // Восстанавливаем значения при загрузке страницы
+  inputs.forEach(input => {
+    const saved = localStorage.getItem(input.name);
+    if (saved) input.value = saved;
+  });
+
+  // Сохраняем значения при вводе
+  inputs.forEach(input => {
+    input.addEventListener('input', () => {
+      localStorage.setItem(input.name, input.value);
+    });
+  });
+</script>
+
 </body>
+    
 </html>
